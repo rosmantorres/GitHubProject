@@ -1,0 +1,10 @@
+# Aqui se puede definir toda la configuracion de la vista de una plantilla, como
+# por ejemplo las hojas de estilos para las distintas plantillas. En este caso
+# no se va a hacer por el archivo de configuracion sino desde la misma plantilla
+# con ayuda del helper use_stylesheet()
+
+# indexSuccess:
+  # stylesheets: [jobs.css]
+ 
+# showSuccess:
+  # stylesheets: [job.css]

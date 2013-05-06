@@ -1,0 +1,62 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/10-Routing
+
+# La nuevo URI interno para un puesto de trabajo es bastante largo y tedioso de 
+# escribir, por eso la clase route puede ser modificada. Para la siguiente ruta, 
+# es mejor utilizar sfDoctrineRoute ya que la clase está optimizada para las 
+# rutas que representan objetos Doctrine o colecciones de objetos Doctrine.
+# 
+# La linea options personaliza el comportamiento de la ruta. Aquí, la opción model
+# define la clase del módelo Doctrine (Trabajo) relacionada a la ruta, y la opción
+# type define que esta ruta está vinculada a un objeto (también puedes utilizar 
+# list si una ruta representa una colección de objetos).
+# La ruta es ahora consciente de su relación con Trabajo y así podemos simplificar 
+# desde las plantillas la llamada url_for():
+#
+# Nota: las variables para esta ocacion se tienen que llamar tal cual como se llaman
+# en el modelo, pero si no se utiliza sfDoctrineRoute entonces si se pueden llamar
+# distinto. Tambien si se necesita pasar atributos o valores que no corresponden
+# al objeto, entonces no hacerlo asi (quitar class y options. Otra cosa adicional 
+# es que aca los nombres del objeto trabajo, tienen acompañado un guion bajo mas 
+# la palabra slug (:compania_slug), si se revisa la clase 
+# lib/model/doctrine/Trabajo.class.php vemos los metodos slug, por lo que doctrine 
+# hace getCompaniaSlug a :compania_slug. Se separa con un guion bajo y automaticamente
+# llama a la funcion. Si el metodo se llama getCompaniaSlugeado entonces aca se coloca
+# :compania_slugeado. Si no se quiere llamar al metodo, sino que te traiga tal cual
+# la compania entonces le quitamos el _slug y automaticamente doctrine solo hace 
+# el getCompania()
+mostrar_trabajo:
+  url:   /trabajo/:compania_slug/:localizacion_slug/:id/:posicion_slug
+  class:   sfDoctrineRoute
+  options: { model: Trabajo, type: object }
+  param: { module: trabajo_module, action: show }
+  requirements:
+    id: \d+
+    sf_method: [get]
+
+# El módulo trabajo define las clásicas siete posibles acciones para un modelo,
+# que estan en apps/frontend/modules/trabajo_module/actions/actions.class.php
+# también podemos utilizar la clase sfDoctrineRouteCollection, para no tener
+# que hacer con cada accion del modelo la misma configuracion anterior (mostrar_trabajo)
+# por lo tanto la ruta que se creara (acciones_trabajo) es en realidad un acceso
+# directo que generará automáticamente las siguientes siete rutas sfDoctrineRoute
+# y que para comprobarlo podemor ejecutar la tarea app:route
+# $ php symfony app:routes frontend. Para llamar la ruta especifica desde una plantilla
+# se tiene que hacer indicando url_for(acciones_trabajo_{accion})
+acciones_trabajo:
+  class:   sfDoctrineRouteCollection
+  options: { model: Trabajo }
+    
+# default rules
+homepage:
+  url:   /
+  param: { module: trabajo_module, action: index }
+
+# generic rules
+# please, remove them by adding more specific rules
+default_index:
+  url:   /:module
+  param: { action: index }
+
+default:
+  url:   /:module/:action/*

@@ -1,0 +1,65 @@
+# # Populate this file with data to be loaded by your ORM's *:data-load task.
+# # You can create multiple files in this directory (i.e. 010_users.yml,
+# # 020_articles.yml, etc) which will be loaded in alphabetical order.
+# # 
+# # See documentation for your ORM's *:data-load task for more information.
+# 
+# User:
+#   fabien:
+#     username: fabien
+#     password: changeme
+#     name:     Fabien Potencier
+#     email:    fabien.potencier@symfony-project.com
+#   kris:
+#     username: Kris.Wallsmith
+#     password: changeme
+#     name:     Kris Wallsmith
+#     email:    kris.wallsmith@symfony-project.com
+
+# data/fixtures/categoria.yml
+Categoria:
+  diseyo:
+    nombre: Diseño
+  programacion:
+    nombre: Programacion
+  gestion:
+    nombre: Gestion
+  administracion:
+    nombre: Administracion
+    
+# data/fixtures/trabajo.yml
+Trabajo:
+  trabajo_symfony:
+    Categoria:    programacion
+    tipo:         Tiempo-completo
+    compania:     Corpoelec
+    logo:         logo-corpoelec.png
+    url:          http://www.corpoelec.gob.ve/
+    posicion:     Desarrollor Web
+    localizacion: Venezuela, San Bernardino - Caracas
+    descripcion:  |
+       Desarrollado de sitios web con Symfony con las tecnologías de código abierto.
+       Usted tiene un mínimo de 3 años experiencia en desarrollo web con PHP o Java 
+       y desea participar en el desarrollo de sitios Web 2.0 con el mejor 
+       marco de trabajo disponible.
+    como_aplicar: |
+      Enviar el curriculum al correo descrito en el trabajo
+    esta_publicado: true
+    esta_activado:  true
+    token:          trabajo_symfony
+    correo:         job@example.com
+    expira_el:      '2013-05-31'  
+
+# data/fixtures/afiliado.yml
+Afiliado:
+  afiliado_uno:
+    url: http://
+    correo: nose@afiliadouno.com
+    token: afiliado_uno
+    esta_activo: true
+    
+# data/fixtures/categoriaafiliado.yml    
+CategoriaAfiliado:  
+  categoria_afiliado:
+    Categoria: diseyo
+    Afiliado:  afiliado_uno

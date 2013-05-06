@@ -1,4 +1,0 @@
-GitHubProject
-=============
-
-Repositorio GitHub

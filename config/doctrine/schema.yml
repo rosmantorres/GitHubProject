@@ -1,0 +1,76 @@
+Afiliado:
+  connection: doctrine
+  tableName: afiliado
+  actAs: { Timestampable: ~ }
+  columns:
+    id: { type: integer, primary: true, autoincrement: true }
+    url: { type: string(255), notnull: true }
+    correo: { type: string(255), notnull: true }
+    token: { type: string(255), notnull: true }
+    esta_activo: { type: boolean, default: '0', notnull: true }
+  relations:
+    CategoriaAfiliado:
+      local: id
+      foreign: afiliado_id
+      type: many
+      
+Categoria:
+  connection: doctrine
+  tableName: categoria
+  actAs: { Timestampable: ~ }
+  columns:
+    id: { type: integer, primary: true, autoincrement: true }
+    nombre: { type: string(255), notnull: true, autoincrement: false, unique: true }
+  relations:
+    CategoriaAfiliado:
+      local: id
+      foreign: categoria_id
+      type: many
+    Trabajo:
+      local: id
+      foreign: categoria_id
+      foreignAlias: MiCategoria
+      type: many
+      
+CategoriaAfiliado:
+  connection: doctrine
+  tableName: categoria_afiliado  
+  columns:
+    categoria_id: { type: integer, primary: true }
+    afiliado_id: { type: integer, primary: true }
+  relations:
+    Afiliado:
+      local: afiliado_id
+      foreign: id
+      type: one
+    Categoria:
+      local: categoria_id
+      foreign: id
+      type: one
+
+Trabajo:
+  connection: doctrine
+  tableName: trabajo
+  actAs: { Timestampable: ~ }
+  columns:
+    id: { type: integer, primary: true, autoincrement: true }
+    categoria_id: { type: integer, notnull: true }
+    tipo: { type: string(255) }
+    compania: { type: string(255), notnull: true }
+    logo: { type: string(255) }
+    url: { type: string(255) }
+    posicion: { type: string(255), notnull: true }
+    localizacion: { type: string(255), notnull: true }
+    descripcion: { type: string(4000), notnull: true }
+    como_aplicar: { type: string(4000), notnull: true }
+    token: { type: string(255), notnull: true, unique: true }
+    esta_publicado: { type: boolean, default: '1', notnull: true }
+    esta_activado: { type: boolean, default: '0', notnull: true }      
+    correo: { type: string(255), notnull: true }
+    expira_el: { type: timestamp, notnull: true }
+  relations:
+    Categoria:
+      local: categoria_id
+      foreign: id
+      foreignAlias: MisTrabajos 
+      type: one
