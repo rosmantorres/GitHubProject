@@ -67,7 +67,7 @@ Trabajo:
     esta_publicado: { type: boolean, default: '1', notnull: true }
     esta_activado: { type: boolean, default: '0', notnull: true }      
     correo: { type: string(255), notnull: true }
-    expira_el: { type: timestamp, notnull: true }
+    expira_el: { type: timestamp }
   relations:
     Categoria:
       local: categoria_id

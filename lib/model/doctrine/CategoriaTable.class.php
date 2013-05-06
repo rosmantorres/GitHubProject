@@ -7,13 +7,26 @@
  */
 class CategoriaTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object CategoriaTable
-     */
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Categoria');
-    }
+
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object CategoriaTable
+   */
+  public static function getInstance()
+  {
+    return Doctrine_Core::getTable('Categoria');
+  }
+
+  /*
+   * Obtener todas las categorías con al menos un puesto de trabajo activo.
+   */
+  public function getConTrabajos()
+  {
+    return $this->createQuery('c')
+            ->leftJoin('c.Trabajo t')
+            ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
+            ->execute();
+  }
+
 }

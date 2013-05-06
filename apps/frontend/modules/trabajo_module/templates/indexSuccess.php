@@ -2,6 +2,38 @@
 <?php use_stylesheet('jobs.css') ?> 
 
 <div id="jobs">
+  <?php foreach ($categorias as $category): ?>
+    <div class="category_<?php echo Jobeet::slugear($category->getNombre()) ?>">
+      <div class="category">
+        <div class="feed">
+          <a href="">Feed</a>
+        </div>
+        <h1><?php echo $category ?></h1>
+      </div>
+ 
+      <table class="jobs">
+        <?php foreach ($category->getTrabajosActivos(sfConfig::get('app_max_trabajo_en_homepage')) as $i => $job): ?>
+          <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
+            <td class="location">
+              <?php echo $job->getLocalizacion() ?>
+            </td>
+            <td class="position">
+              <?php echo link_to($job->getPosicion(), 'mostrar_trabajo', $job) ?>
+            </td>
+            <td class="company">
+              <?php echo $job->getCompania() ?>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </table>
+    </div>
+  <?php endforeach; ?>
+</div>
+
+
+
+<?php /*
+<div id="jobs">
   <table class="jobs">  
     <?php foreach ($trabajos as $i => $job): ?>
       <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
@@ -9,8 +41,9 @@
         <td class="position">
           <!-- 1era Opcion = Es mucho más rápido ya que el enrutamiento no tiene
                              que analizar todas las rutas para encontrar el mejor
-                             patrón coincidente. Busca directamente. -->
-          <?php /* echo link_to($job->getPosicion(),
+                             patrón coincidente. Busca directamente. --> 
+ */?>
+          <?php /*  echo link_to($job->getPosicion(),
                   url_for('@mostrar_trabajo?module=trabajo_module&action=show&id='.
                           $job->getId().'&compania='.$job->getCompania().'&posicion='.
                           $job->getPosicion().'&localizacion='.$job->getLocalizacion())) */ ?>
@@ -28,18 +61,19 @@
                                               'compania'  => $job->getCompania(),
                                               'localizacion' => $job->getLocalizacion(),
                                               'posicion' => $job->getPosicion(),))
-                  ) */ ?>
+                  ) */ ?>        
           <!-- Opcion Extra = Solo si la ruta fue definida con sfDoctrineRoute en routing.yml -->
-          <?php echo link_to($job->getPosicion(), url_for('mostrar_trabajo', $job)) ?>
-          <!-- Nota = Si no indicamos la ruta especifica -->
-          <?php /* echo link_to($job->getPosicion(), url_for('acciones_trabajo_show',$job)) */ ?>                    
+<!-- este si va descomentado -->         <?php /* echo link_to($job->getPosicion(), url_for('mostrar_trabajo', $job)) */ ?>
+          <!-- Nota = Si no indicamos la ruta especifica -->         
+          <?php /* echo link_to($job->getPosicion(), url_for('acciones_trabajo_show',$job)) */ ?>          
+<?php /*          
         </td>
         <td class="company"><?php echo $job->getCompania() ?></td>
       </tr>
     <?php endforeach; ?>
   </table>
 </div>
-
+*/ ?>
 <?php /*
 <?php use_stylesheet('jobs.css') ?>
 <h1>Lista de Trabajo</h1>

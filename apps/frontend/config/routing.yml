@@ -24,11 +24,11 @@
 # llama a la funcion. Si el metodo se llama getCompaniaSlugeado entonces aca se coloca
 # :compania_slugeado. Si no se quiere llamar al metodo, sino que te traiga tal cual
 # la compania entonces le quitamos el _slug y automaticamente doctrine solo hace 
-# el getCompania()
+# el getCompania(). Leer el metodo recuperarTrabajosActivos en TrabajoTable.class.php
 mostrar_trabajo:
   url:   /trabajo/:compania_slug/:localizacion_slug/:id/:posicion_slug
   class:   sfDoctrineRoute
-  options: { model: Trabajo, type: object }
+  options: { model: Trabajo, type: object, method_for_query: recuperarTrabajosActivos }
   param: { module: trabajo_module, action: show }
   requirements:
     id: \d+
@@ -44,6 +44,7 @@ mostrar_trabajo:
 # $ php symfony app:routes frontend. Para llamar la ruta especifica desde una plantilla
 # se tiene que hacer indicando url_for(acciones_trabajo_{accion})
 acciones_trabajo:
+  url:   /trabajo/:compania_slug/:localizacion_slug/:id/:posicion_slug
   class:   sfDoctrineRouteCollection
   options: { model: Trabajo }
     

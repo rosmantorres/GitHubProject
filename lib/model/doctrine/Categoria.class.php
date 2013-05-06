@@ -12,6 +12,16 @@
  */
 class Categoria extends BaseCategoria
 {
+  public function getTrabajosActivos($max = 5)
+  { 
+     $q = Doctrine_Query::create()
+             ->from('Trabajo t')
+             ->where('t.categoria_id = ?', $this->getId())
+             ->limit($max);
+     
+     return Doctrine_Core::getTable('Trabajo')->getTrabajosActivos($q);
+  }
+  
   public function __toString()
   {
     return $this->getNombre();

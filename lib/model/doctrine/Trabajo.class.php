@@ -10,12 +10,31 @@
  * @author     ROSMAN_TORRES
  * @version    SVN: $Id: Builder.php 7490 2010-03-29 19:53:27Z jwage $
  */
-class Trabajo extends BaseTrabajo {
+class Trabajo extends BaseTrabajo
+{
+  /*
+   * Cuando necesitas hacer algo automáticamente antes que un objeto Doctrine 
+   * sea guardado en la base de datos, puedes sobreescribir el método save() 
+   * de la clase del modelo:
+   */
+
+  public function save(Doctrine_Connection $conn = null)
+  {
+    // El método isNew() devuelve true cuando el objeto no ha sido serializado 
+    // aún en la base de datos,
+    if ($this->isNew() && !$this->getExpiraEl()) {
+      $now = $this->getCreatedAt() ? $this->getDateTimeObject('created_at')->format('U') : time();
+      $this->setExpiraEl(date('Y-m-d H:i:s', $now + 86400 * sfConfig::get('app_dias_activo')));
+    }
+
+    return parent::save($conn);
+  }
 
   /*
    * "Slugeando" valores de columnas mediante la sustitución de todos los 
    * caracteres no ASCII por un -. 
    */
+
   public function getCompaniaSlug()
   {
     return Jobeet::slugear($this->getCompania());

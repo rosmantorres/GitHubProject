@@ -26,13 +26,14 @@ Categoria:
     nombre: Gestion
   administracion:
     nombre: Administracion
-    
+
 # data/fixtures/trabajo.yml
 Trabajo:
-  trabajo_symfony:
+<?php for ($i = 1; $i <= 30; $i++): ?>
+  trabajo_symfony_<?php echo $i ?>:
     Categoria:    programacion
     tipo:         Tiempo-completo
-    compania:     Corpoelec
+    compania:     Corpoelec<?php echo $i."\n" ?> 
     logo:         logo-corpoelec.png
     url:          http://www.corpoelec.gob.ve/
     posicion:     Desarrollor Web
@@ -46,9 +47,9 @@ Trabajo:
       Enviar el curriculum al correo descrito en el trabajo
     esta_publicado: true
     esta_activado:  true
-    token:          trabajo_symfony
+    token:          trabajo_symfony_<?php echo $i."\n" ?>
     correo:         job@example.com
-    expira_el:      '2013-05-31'  
+<?php endfor ?>
 
 # data/fixtures/afiliado.yml
 Afiliado:

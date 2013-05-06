@@ -1,5 +1,5 @@
 <?php
-
+/* Lic pegy freiter 2pm 0212-9935058 */
 /**
  * trabajo_module actions.
  *
@@ -8,25 +8,56 @@
  * @author     ROSMAN_TORRES
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class trabajo_moduleActions extends sfActions
-{  
+class trabajo_moduleActions extends sfActions {
+
   public function executeIndex(sfWebRequest $request)
   {
-    $this->trabajos = Doctrine_Core::getTable('Trabajo')
-      ->createQuery('a')
-      ->execute();
+    /*
+     * Selecciona todos los puestos de trabajo.
+     */
+    /*$this->trabajos = Doctrine_Core::getTable('Trabajo')
+            ->createQuery('a')
+            ->execute();*/
+
+    /*
+     * Selecciona solo los puestos de trabajos acivos Doctrine_Query::create()
+     */
+    /*$this->trabajos = Doctrine_Query::create()
+            ->from('Trabajo t')
+            ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
+            ->execute();*/
+    
+    /*
+     * Selecciona solo los puestos de trabajos acivos pero con 
+     * Doctrine_Core::getTable('Trabajo'). Mejor manera
+     */
+    /*$this->trabajos = Doctrine_Core::getTable('Trabajo')
+            ->createQuery('t')
+            ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
+            ->execute();*/
+    
+    /*
+     * Las acciones (Controlador) no debe contener codigo del modelo, como se 
+     * hizo en las consultas de arriba. En el modelo MVC, el modelo define toda 
+     * la lógica de negocios, y el Controlador solo invoca al o los metodos 
+     * del modelo para obtener los datos de éste.
+     */
+    //$this->trabajos = Doctrine_Core::getTable('Trabajo')->getTrabajosActivos();
+   
+    
+    $this->categorias = Doctrine_Core::getTable('Categoria')->getConTrabajos();
   }
 
   public function executeShow(sfWebRequest $request)
   {
-    // El sub-framework de rutas tambien 
-    // es capaz de encontrar el objeto en relación con una determinada URL
+// El sub-framework de rutas tambien 
+// es capaz de encontrar el objeto en relación con una determinada URL
     $this->job = $this->getRoute()->getObject();
     /*
-    $this->trabajo = Doctrine_Core::getTable('Trabajo')->find($request->getParameter('id'));
-    $this->job = $this->trabajo;
+      $this->trabajo = Doctrine_Core::getTable('Trabajo')->find($request->getParameter('id'));
+      $this->job = $this->trabajo;
      * 
-     */     
+     */
     $this->forward404Unless($this->job);
   }
 
@@ -76,11 +107,12 @@ class trabajo_moduleActions extends sfActions
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid())
-    {
+    if ($form->isValid()) {
       $trabajo = $form->save();
 
-      $this->redirect('trabajo_module/edit?id='.$trabajo->getId());
+      $this->redirect('trabajo_module/edit?id=' . $trabajo->getId());
     }
   }
+
 }
+

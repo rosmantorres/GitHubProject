@@ -7,13 +7,53 @@
  */
 class TrabajoTable extends Doctrine_Table
 {
-    /**
-     * Returns an instance of this class.
-     *
-     * @return object TrabajoTable
+
+  /**
+   * Returns an instance of this class.
+   *
+   * @return object TrabajoTable
+   */
+  public static function getInstance()
+  {
+    return Doctrine_Core::getTable('Trabajo');
+  }
+
+  public function getTrabajosActivos(Doctrine_Query $q = null)
+  {
+    /* Se puede hacer asi, pero como ya estamos dentro del modelo no hace falta
+     * Doctrine_Query::create()
      */
-    public static function getInstance()
-    {
-        return Doctrine_Core::getTable('Trabajo');
+    /*
+      return Doctrine_Core::getTable('Trabajo')
+      ->createQuery('t')
+      ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
+      ->execute();
+      return Doctrine_Query::create()
+      ->from('Trabajo t')
+      ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
+      ->execute();
+     */
+    
+    if (is_null($q)){
+      $q = Doctrine_Query::create()
+              ->from('Trabajo t');
     }
+    
+    return $q->andWhere('t.expira_el > ?', date('Y-m-d h:i:s', time()))
+             ->orderBy('t.expira_el DESC')
+             ->execute();
+  }
+  
+  /*
+   * Método que asegura la pagina cuando un puesto de trabajo expira y el usuario
+   * aun sabe la URL. No debería ser posible acceder a él nunca más
+   * 
+   */
+  public function recuperarTrabajosActivos(Doctrine_Query $q)
+  {
+    $q->andWhere('a.expira_el > ?', date('Y-m-d h:i:s', time()));
+ 
+    return $q->fetchOne();
+  }
+
 }
