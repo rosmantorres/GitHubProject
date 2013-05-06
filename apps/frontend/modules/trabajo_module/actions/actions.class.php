@@ -1,5 +1,7 @@
 <?php
+
 /* Lic pegy freiter 2pm 0212-9935058 */
+
 /**
  * trabajo_module actions.
  *
@@ -8,34 +10,40 @@
  * @author     ROSMAN_TORRES
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class trabajo_moduleActions extends sfActions {
+class trabajo_moduleActions extends sfActions
+{
+
+  public function executePDO(sfWebRequest $request)
+  {
+    $this->consulta = Doctrine_Core::getTable('Trabajo')->getAlgo();
+  }
 
   public function executeIndex(sfWebRequest $request)
   {
     /*
      * Selecciona todos los puestos de trabajo.
      */
-    /*$this->trabajos = Doctrine_Core::getTable('Trabajo')
-            ->createQuery('a')
-            ->execute();*/
+    /* $this->trabajos = Doctrine_Core::getTable('Trabajo')
+      ->createQuery('a')
+      ->execute(); */
 
     /*
      * Selecciona solo los puestos de trabajos acivos Doctrine_Query::create()
      */
-    /*$this->trabajos = Doctrine_Query::create()
-            ->from('Trabajo t')
-            ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
-            ->execute();*/
-    
+    /* $this->trabajos = Doctrine_Query::create()
+      ->from('Trabajo t')
+      ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
+      ->execute(); */
+
     /*
      * Selecciona solo los puestos de trabajos acivos pero con 
      * Doctrine_Core::getTable('Trabajo'). Mejor manera
      */
-    /*$this->trabajos = Doctrine_Core::getTable('Trabajo')
-            ->createQuery('t')
-            ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
-            ->execute();*/
-    
+    /* $this->trabajos = Doctrine_Core::getTable('Trabajo')
+      ->createQuery('t')
+      ->where('t.expira_el > ?', date('Y-m-d h:i:s', time()))
+      ->execute(); */
+
     /*
      * Las acciones (Controlador) no debe contener codigo del modelo, como se 
      * hizo en las consultas de arriba. En el modelo MVC, el modelo define toda 
@@ -43,8 +51,8 @@ class trabajo_moduleActions extends sfActions {
      * del modelo para obtener los datos de éste.
      */
     //$this->trabajos = Doctrine_Core::getTable('Trabajo')->getTrabajosActivos();
-   
-    
+
+
     $this->categorias = Doctrine_Core::getTable('Categoria')->getConTrabajos();
   }
 
