@@ -45,6 +45,7 @@ class TrabajoTable extends Doctrine_Table
       ->execute();
      */
 
+    /*
     if (is_null($q)) {
       $q = Doctrine_Query::create()
               ->from('Trabajo t');
@@ -53,6 +54,10 @@ class TrabajoTable extends Doctrine_Table
     return $q->andWhere('t.expira_el > ?', date('Y-m-d h:i:s', time()))
                     ->orderBy('t.expira_el DESC')
                     ->execute();
+     * 
+     */
+    
+    return $this->addActiveJobsQuery($q)->execute();
   }
 
   /*
@@ -62,10 +67,30 @@ class TrabajoTable extends Doctrine_Table
    */
 
   public function recuperarTrabajosActivos(Doctrine_Query $q)
-  {
-    $q->andWhere('a.expira_el > ?', date('Y-m-d h:i:s', time()));
-
-    return $q->fetchOne();
+  {    
+    //$q->andWhere('a.expira_el > ?', date('Y-m-d h:i:s', time()));
+    //return $q->fetchOne();
+    return $this->addActiveJobsQuery($q)->fetchOne(); 
   }
 
+  public function countActiveJobs(Doctrine_Query $q = null)
+  {
+    return $this->addActiveJobsQuery($q)->count();
+  }
+  
+  public function addActiveJobsQuery(Doctrine_Query $q = null)
+  {
+    if (is_null($q))
+    {
+      $q = Doctrine_Query::create()
+        ->from('Trabajo t');
+    }
+
+    $alias = $q->getRootAlias();
+
+    $q->andWhere($alias . '.expira_el > ?', date('Y-m-d h:i:s', time()))
+      ->addOrderBy($alias . '.expira_el DESC');
+
+    return $q;
+  }
 }

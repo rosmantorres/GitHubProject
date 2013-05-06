@@ -47,6 +47,19 @@ acciones_trabajo:
   url:   /trabajo/:compania_slug/:localizacion_slug/:id/:posicion_slug
   class:   sfDoctrineRouteCollection
   options: { model: Trabajo }
+
+# Un ruta puede usar cualquier columna de su objeto asociado como parámetro. 
+# También puede usa cualquier otro valor si hay un método asociado definido en 
+# la clase del objeto. Debido a que el parámetro slug no tiene una columna 
+# correspondiente en la tabla category, necesitamos agregar un método de acceso
+# virtual en lib/model/doctrine/Categoria.class.php para que la ruta funcione
+mostrar_categoria:
+  url:   /categoria/:slug
+  class:   sfDoctrineRoute
+  options: { model: Categoria, type: object }
+  param: { module: categoria_module, action: show }
+  requirements:
+    id: \d+
     
 # default rules
 homepage:
