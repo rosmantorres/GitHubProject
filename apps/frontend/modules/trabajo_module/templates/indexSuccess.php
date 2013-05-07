@@ -12,7 +12,8 @@
       </div>
  
       <table class="jobs">
-        <?php foreach ($category->getTrabajosActivos(sfConfig::get('app_max_trabajo_en_homepage')) as $i => $job): ?>
+        <?php foreach ($category->getTrabajosActivos(
+                sfConfig::get('app_max_trabajo_en_homepage')) as $i => $job): ?>
           <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
             <td class="location">
               <?php echo $job->getLocalizacion() ?>
@@ -26,6 +27,12 @@
           </tr>
         <?php endforeach; ?>
       </table>
+      <?php if (($count = $category->countActiveJobs() - sfConfig::get('app_max_trabajo_en_homepage')) > 0): ?>
+        <div class="more_jobs">
+          y <?php echo link_to($count, 'mostrar_categoria', $category) ?>
+          mas...
+        </div>
+      <?php endif; ?>
     </div>
   <?php endforeach; ?>
 </div>

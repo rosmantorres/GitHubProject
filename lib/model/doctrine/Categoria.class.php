@@ -34,7 +34,7 @@ class Categoria extends BaseCategoria
 
   public function getSlug()
   {
-    return Jobeet::slugear($this->getName());
+    return Jobeet::slugear($this->getNombre());
   }
 
   public function __toString()
