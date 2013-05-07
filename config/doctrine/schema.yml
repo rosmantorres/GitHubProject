@@ -21,7 +21,7 @@ Categoria:
   actAs:
     Timestampable: ~
     Sluggable:
-      fields: [name]
+      fields: [nombre]
   columns:
     id: { type: integer, primary: true, autoincrement: true }
     nombre: { type: string(255), notnull: true, unique: true }
