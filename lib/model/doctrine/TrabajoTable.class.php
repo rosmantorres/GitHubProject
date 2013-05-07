@@ -62,7 +62,8 @@ class TrabajoTable extends Doctrine_Table
 
   /*
    * Método que asegura la pagina cuando un puesto de trabajo expira y el usuario
-   * aun sabe la URL. No debería ser posible acceder a él nunca más
+   * aun sabe la URL. No debería ser posible acceder a él nunca más. Este metodo
+   * recibira el objeto Doctrine_Query ya listo por parte de la ruta
    * 
    */
 
