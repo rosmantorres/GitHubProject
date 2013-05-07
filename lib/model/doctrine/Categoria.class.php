@@ -13,23 +13,25 @@
 class Categoria extends BaseCategoria
 {
 
-  public function getTrabajosActivos($max = 5)
-  {
-    $q = Doctrine_Query::create()
-            ->from('Trabajo t')
-            ->where('t.categoria_id = ?', $this->getId())
-            ->limit($max);
-
-    return Doctrine_Core::getTable('Trabajo')->getTrabajosActivos($q);
-  }
-
-  public function countActiveJobs()
+  public function getActiveJobsQuery()
   {
     $q = Doctrine_Query::create()
             ->from('Trabajo t')
             ->where('t.categoria_id = ?', $this->getId());
 
-    return Doctrine_Core::getTable('Trabajo')->countActiveJobs($q);
+    return Doctrine_Core::getTable('Trabajo')->addActiveJobsQuery($q);
+  }
+
+  public function getTrabajosActivos($max = 10)
+  {
+    $q = $this->getActiveJobsQuery()->limit($max);
+
+    return $q->execute();
+  }
+
+  public function countActiveJobs()
+  {
+    return $this->getActiveJobsQuery()->count();
   }
 
   public function __toString()

@@ -6,3 +6,4 @@
 all:
   dias_activo: 30
   max_trabajo_en_homepage: 10
+  max_trabajo_en_categoria: 20
