@@ -66,7 +66,6 @@ class TrabajoTable extends Doctrine_Table
    * recibira el objeto Doctrine_Query ya listo por parte de la ruta
    * 
    */
-
   public function recuperarTrabajosActivos(Doctrine_Query $q)
   {    
     //$q->andWhere('a.expira_el > ?', date('Y-m-d h:i:s', time()));
@@ -74,6 +73,11 @@ class TrabajoTable extends Doctrine_Table
     return $this->addActiveJobsQuery($q)->fetchOne(); 
   }
 
+  /*
+   * En el método countActiveJobs(), en vez de usar execute() y recién contar el
+   * número de resultados, usamos el método mas rápido count(). No hace falta la
+   * hidratacion.
+   */
   public function countActiveJobs(Doctrine_Query $q = null)
   {
     return $this->addActiveJobsQuery($q)->count();
