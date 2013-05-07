@@ -31,7 +31,7 @@ Categoria:
 Trabajo:
 <?php for ($i = 1; $i <= 30; $i++): ?>
   trabajo_symfony_<?php echo $i ?>:
-    Categoria:    programacion
+    Categoria:    <?php if ($i < 22) echo "programacion\n"; else echo "diseyo\n"; ?>
     tipo:         Tiempo-completo
     compania:     Corpoelec<?php echo $i."\n" ?> 
     logo:         logo-corpoelec.png
