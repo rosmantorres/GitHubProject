@@ -1,3 +1,4 @@
+# actAs es un behavior o comportamiento
 Afiliado:
   connection: doctrine
   tableName: afiliado
@@ -17,10 +18,13 @@ Afiliado:
 Categoria:
   connection: doctrine
   tableName: categoria
-  actAs: { Timestampable: ~ }
+  actAs:
+    Timestampable: ~
+    Sluggable:
+      fields: [name]
   columns:
     id: { type: integer, primary: true, autoincrement: true }
-    nombre: { type: string(255), notnull: true, autoincrement: false, unique: true }
+    nombre: { type: string(255), notnull: true, unique: true }
   relations:
     CategoriaAfiliado:
       local: id

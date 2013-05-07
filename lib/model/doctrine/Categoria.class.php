@@ -32,11 +32,6 @@ class Categoria extends BaseCategoria
     return Doctrine_Core::getTable('Trabajo')->countActiveJobs($q);
   }
 
-  public function getSlug()
-  {
-    return Jobeet::slugear($this->getNombre());
-  }
-
   public function __toString()
   {
     return $this->getNombre();
