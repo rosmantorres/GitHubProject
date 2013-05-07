@@ -93,8 +93,8 @@ class TrabajoTable extends Doctrine_Table
 
     $alias = $q->getRootAlias();
 
-    $q->andWhere($alias . '.expira_el > ?', date('Y-m-d h:i:s', time()))
-      ->addOrderBy($alias . '.expira_el DESC');
+    $q->andWhere($alias.'.expira_el > ?', date('Y-m-d h:i:s', time()))
+      ->addOrderBy($alias.'.expira_el DESC');
 
     return $q;
   }

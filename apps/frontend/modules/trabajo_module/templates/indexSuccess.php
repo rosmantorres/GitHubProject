@@ -10,23 +10,10 @@
         </div>
         <h1><?php echo link_to($category, 'mostrar_categoria', $category) ?></h1>
       </div>
- 
-      <table class="jobs">
-        <?php foreach ($category->getTrabajosActivos(
-                sfConfig::get('app_max_trabajo_en_homepage')) as $i => $job): ?>
-          <tr class="<?php echo fmod($i, 2) ? 'even' : 'odd' ?>">
-            <td class="location">
-              <?php echo $job->getLocalizacion() ?>
-            </td>
-            <td class="position">
-              <?php echo link_to($job->getPosicion(), 'mostrar_trabajo', $job) ?>
-            </td>
-            <td class="company">
-              <?php echo $job->getCompania() ?>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      </table>
+      
+      <?php include_partial('trabajo_module/listarTrabajosActivos', 
+              array('jobs' => $category->getTrabajosActivos(sfConfig::get('app_max_trabajo_en_homepage')))) ?>
+      
       <?php if (($count = $category->countActiveJobs() - sfConfig::get('app_max_trabajo_en_homepage')) > 0): ?>
         <div class="more_jobs">
           y <?php echo link_to($count, 'mostrar_categoria', $category) ?>
