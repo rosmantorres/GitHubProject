@@ -2,8 +2,8 @@
 
 /*
  * Para ejecutar las pruebas:
- * $ php test/unit/TrabajoTest.php
- * $ php symfony test:unit Trabajo
+ * $ php test/unit/LogicaTest.php
+ * $ php symfony test:unit Logica
  */
 
 // Si se llama un metodo de otro lado, hay que incluirlo
