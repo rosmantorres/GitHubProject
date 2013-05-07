@@ -11,7 +11,7 @@
         <h1><?php echo link_to($category, 'mostrar_categoria', $category) ?></h1>
       </div>
       
-      <?php include_partial('trabajo_module/listarTrabajosActivos', 
+      <?php include_partial('listarTrabajosActivos', 
               array('jobs' => $category->getTrabajosActivos(sfConfig::get('app_max_trabajo_en_homepage')))) ?>
       
       <?php if (($count = $category->countActiveJobs() - sfConfig::get('app_max_trabajo_en_homepage')) > 0): ?>
