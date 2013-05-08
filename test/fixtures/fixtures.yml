@@ -18,7 +18,7 @@ Trabajo:
     compania:     Corpoelec<?php echo $i."\n" ?> 
     logo:         logo-corpoelec.png
     url:          http://www.corpoelec.gob.ve/
-    posicion:     Desarrollor Web
+    posicion:     Desarrollo Web
     localizacion: Venezuela, San Bernardino - Caracas
     descripcion:  |
        Desarrollado de sitios web con Symfony con las tecnologías de código abierto.
