@@ -1,6 +1,10 @@
 # You can find more information about this file on the symfony website:
 # http://www.symfony-project.org/reference/1_4/en/10-Routing
 
+postear_trabajo:
+  url: /postear_trabajo
+  param: { module: trabajo_module, action: new }
+
 # La nuevo URI interno para un puesto de trabajo es bastante largo y tedioso de 
 # escribir, por eso la clase route puede ser modificada. Para la siguiente ruta, 
 # es mejor utilizar sfDoctrineRoute ya que la clase está optimizada para las 

@@ -98,4 +98,15 @@ class TrabajoTable extends Doctrine_Table
 
     return $q;
   }
+  
+  static public $types = array(
+    'full-time' => 'Full time',
+    'part-time' => 'Part time',
+    'freelance' => 'Freelance',
+  );
+ 
+  public function getTypes()
+  {
+    return self::$types;
+  }
 }
