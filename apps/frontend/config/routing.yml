@@ -47,11 +47,19 @@ mostrar_trabajo:
 # y que para comprobarlo podemor ejecutar la tarea app:route
 # $ php symfony app:routes frontend. Para llamar la ruta especifica desde una plantilla
 # se tiene que hacer indicando url_for(acciones_trabajo_{accion})
+# La columna que aparece en opciones es para que no se genere la accion con la 
+# clave primaria sino con una en especifica.
+# El object_actions toma un array de acciones adicionales para el objeto dado, es
+# decir se le agrego una accion nueva que no aparece por defecto
 acciones_trabajo:
   class:   sfDoctrineRouteCollection
-  options: { model: Trabajo, module: trabajo_module, column: token }
+  options:
+    model: Trabajo
+    module: trabajo_module
+    column: token
+    object_actions: { publish: put }
   requirements: { token: \w+ }
-
+  
 # Un ruta puede usar cualquier columna de su objeto asociado como parámetro. 
 # También puede usa cualquier otro valor si hay un método asociado definido en 
 # la clase del objeto. Debido a que el parámetro slug no tiene una columna 

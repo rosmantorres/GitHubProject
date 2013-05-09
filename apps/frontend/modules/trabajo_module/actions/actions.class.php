@@ -116,17 +116,32 @@ class trabajo_moduleActions extends sfActions
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
     $form->bind(
-            $request->getParameter($form->getName()), 
-            $request->getFiles($form->getName())
-            );
-    
-    if ($form->isValid()) 
-    {
+            $request->getParameter($form->getName()), $request->getFiles($form->getName())
+    );
+
+    if ($form->isValid()) {
       $trabajo = $form->save();
       //$this->redirect('trabajo_module/edit?id=' . $trabajo->getId());
       $this->redirect($this->generateUrl('acciones_trabajo_show', $trabajo));
     }
-  }
+  }  
+  
+  public function executePublish(sfWebRequest $request)
+  {
+    $request->checkCSRFProtection();
 
+    $job = $this->getRoute()->getObject();
+    $job->publish();
+
+    $this->getUser()->setFlash('notice', sprintf('Tu trabajo esta ahora en linea por %s dias.', sfConfig::get('app_dias_activo')));
+
+    $this->redirect($this->generateUrl('@mostrar_trabajo', $job));
+  }
+  
+  public function publish()
+  {
+    $this->setEstaActivado(true);
+    $this->save();  
+  }
 }
 
