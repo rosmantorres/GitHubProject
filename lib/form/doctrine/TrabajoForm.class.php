@@ -27,10 +27,41 @@ class TrabajoForm extends BaseTrabajoForm
      * menos uno. Ambos se pueden mezclar segun lo que se desee, creando complejos
      * validadores basados en booleanos
     */
+    
+    // Agregandole un validador al widget del correo
     $this->validatorSchema['correo'] = new sfValidatorAnd(
             array($this->validatorSchema['correo'],new sfValidatorEmail(),));
     
+    // Cambiando el widget del tipo de trabajo a un widget choice (select) 
     $this->widgetSchema['tipo'] = new sfWidgetFormChoice(
-            array('choices'  => Doctrine_Core::getTable('Trabajo')->getTypes(),'expanded' => true,'multiple' => true));
+            array('choices'  => Doctrine_Core::getTable('Trabajo')->getTypes(),
+                  'expanded' => false,
+                  'multiple' => false,));
+    
+    // Creandole un validador al widget anterior
+    $this->validatorSchema['tipo'] = new sfValidatorChoice(
+            array('choices' => array_keys(Doctrine_Core::getTable('Trabajo')->getTypes()),));
+    
+    // Cambiando el widget del logo a un widget de tipo file (archivo)
+    $this->widgetSchema['logo'] = new sfWidgetFormInputFile(
+            array('label' => 'Logo compañia',));
+    
+    /*
+     * Creandole un validador al widget anterior. sfValidatorFile es muy 
+     * interesante ya que hace una serie de cosas: 
+     *    Valida que el archivo subido es una imagen en un formato web (mime_types)
+     *    Cambia el nombre del archivo a algo único
+     *    Almacena el archivo en un path dado
+     *    Actualiza la columna logo con el nombre generado
+     */
+    $this->validatorSchema['logo'] = new sfValidatorFile(
+            array('required'   => false,
+                  'path'       => sfConfig::get('sf_upload_dir').'/logos_compania',
+                  'mime_types' => 'web_images',));
+    
+    // Agregando un msj de ayuda
+    $this->widgetSchema->setHelp('esta_publicado', 
+            'El trabajo puede ser publicado o no en la pag web afiliada.');
+    
   }  
 }

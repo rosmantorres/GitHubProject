@@ -48,7 +48,6 @@ mostrar_trabajo:
 # $ php symfony app:routes frontend. Para llamar la ruta especifica desde una plantilla
 # se tiene que hacer indicando url_for(acciones_trabajo_{accion})
 acciones_trabajo:
-  url:   /trabajo/:compania_slug/:localizacion_slug/:id/:posicion_slug
   class:   sfDoctrineRouteCollection
   options: { model: Trabajo }
 
