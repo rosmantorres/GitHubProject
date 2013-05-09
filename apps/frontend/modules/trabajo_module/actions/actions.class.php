@@ -87,15 +87,16 @@ class trabajo_moduleActions extends sfActions
 
   public function executeEdit(sfWebRequest $request)
   {
-    $this->forward404Unless($trabajo = Doctrine_Core::getTable('Trabajo')->find(array($request->getParameter('id'))), sprintf('Object trabajo does not exist (%s).', $request->getParameter('id')));
-    $this->form = new TrabajoForm($trabajo);
+    //$this->forward404Unless($trabajo = Doctrine_Core::getTable('Trabajo')->find(array($request->getParameter('id'))), sprintf('Object trabajo does not exist (%s).', $request->getParameter('id')));
+    $this->forward404Unless($this->getRoute()->getObject());
+    $this->form = new TrabajoForm($this->getRoute()->getObject());
   }
 
   public function executeUpdate(sfWebRequest $request)
   {
-    $this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
-    $this->forward404Unless($trabajo = Doctrine_Core::getTable('Trabajo')->find(array($request->getParameter('id'))), sprintf('Object trabajo does not exist (%s).', $request->getParameter('id')));
-    $this->form = new TrabajoForm($trabajo);
+    //$this->forward404Unless($request->isMethod(sfRequest::POST) || $request->isMethod(sfRequest::PUT));
+    //$this->forward404Unless($trabajo = Doctrine_Core::getTable('Trabajo')->find(array($request->getParameter('id'))), sprintf('Object trabajo does not exist (%s).', $request->getParameter('id')));
+    $this->form = new TrabajoForm($this->getRoute()->getObject());
 
     $this->processForm($request, $this->form);
 
@@ -114,11 +115,16 @@ class trabajo_moduleActions extends sfActions
 
   protected function processForm(sfWebRequest $request, sfForm $form)
   {
-    $form->bind($request->getParameter($form->getName()), $request->getFiles($form->getName()));
-    if ($form->isValid()) {
+    $form->bind(
+            $request->getParameter($form->getName()), 
+            $request->getFiles($form->getName())
+            );
+    
+    if ($form->isValid()) 
+    {
       $trabajo = $form->save();
-
-      $this->redirect('trabajo_module/edit?id=' . $trabajo->getId());
+      //$this->redirect('trabajo_module/edit?id=' . $trabajo->getId());
+      $this->redirect($this->generateUrl('acciones_trabajo_show', $trabajo));
     }
   }
 

@@ -24,7 +24,7 @@
             <div class="post">
               <h2>Pregunte a las personas</h2>
               <div>
-                <?php echo link_to('Postear un trabajo',url_for('@postear_trabajo')) ?>
+                <?php echo link_to('Postear un trabajo',url_for('@acciones_trabajo_new')) ?>
               </div>
             </div>
 

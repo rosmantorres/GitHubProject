@@ -6,6 +6,10 @@
   <?php echo $job->getCompania().' '.$job->getPosicion() ?>
 <?php end_slot(); ?>
 
+<?php if ($sf_request->getParameter('token') == $job->getToken()): ?>
+  <?php include_partial('admin', array('job' => $job)) ?>
+<?php endif ?>
+
 <div id="job">
   <h1><?php echo $job->getCompania() ?></h1>
   <h2><?php echo $job->getLocalizacion() ?></h2>
@@ -15,8 +19,8 @@
   </h3>
  
   <?php if ($job->getLogo()): ?>
-    <div class="logo">
-      <?php echo link_to(image_tag($job->getLogo(),'size=160x50'),$job->getUrl()) ?>      
+    <div class="logo">      
+      <?php echo link_to(image_tag('/uploads/logos_compania/'.$job->getLogo(),'size=160x50'),$job->getUrl()) ?>      
     </div>
   <?php endif; ?>
  
@@ -33,7 +37,7 @@
   </div>
  
   <div style="padding: 20px 0">
-    <?php echo link_to('Editar',  url_for('trabajo_module/edit?id='.$job->getId())) ?>    
+    <?php echo link_to('Editar',  url_for('acciones_trabajo_edit',$job)) ?>    
   </div>
 </div>
 

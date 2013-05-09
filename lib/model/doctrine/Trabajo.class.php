@@ -27,6 +27,10 @@ class Trabajo extends BaseTrabajo
       $this->setExpiraEl(date('Y-m-d H:i:s', $now + 86400 * sfConfig::get('app_dias_activo')));
     }
 
+    if (!$this->getToken()) {
+      $this->setToken(sha1($this->getCorreo() . rand(11111, 99999)));
+    }
+
     return parent::save($conn);
   }
 

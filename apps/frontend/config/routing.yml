@@ -49,7 +49,8 @@ mostrar_trabajo:
 # se tiene que hacer indicando url_for(acciones_trabajo_{accion})
 acciones_trabajo:
   class:   sfDoctrineRouteCollection
-  options: { model: Trabajo }
+  options: { model: Trabajo, module: trabajo_module, column: token }
+  requirements: { token: \w+ }
 
 # Un ruta puede usar cualquier columna de su objeto asociado como parámetro. 
 # También puede usa cualquier otro valor si hay un método asociado definido en 

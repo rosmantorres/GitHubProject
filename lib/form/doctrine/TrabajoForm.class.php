@@ -16,7 +16,8 @@ class TrabajoForm extends BaseTrabajoForm
       $this['created_at'], 
       $this['updated_at'],
       $this['expira_el'], 
-      $this['esta_activado']      
+      $this['esta_activado'],
+      $this['token']
     );
     
     /* 

@@ -6,7 +6,7 @@
     <tfoot>
       <tr>
         <td colspan="2">
-          <input type="submit" value="Preview your job" />
+          <input type="submit" value="Vista previa del trabajo" />
         </td>
       </tr>
     </tfoot>
