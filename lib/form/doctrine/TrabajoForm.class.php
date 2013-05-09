@@ -64,5 +64,8 @@ class TrabajoForm extends BaseTrabajoForm
     $this->widgetSchema->setHelp('esta_publicado', 
             'El trabajo puede ser publicado o no en la pag web afiliada.');
     
+    // Cambiando el nombre al formulario para que sea mas limpio a la hora de
+    // obtener los campos -> se puede ver viendo el codigo fuente en el navegador
+    //$this->widgetSchema->setNameFormat('campo[%s]_trabajo');
   }  
 }
