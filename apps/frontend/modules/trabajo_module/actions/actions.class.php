@@ -131,17 +131,17 @@ class trabajo_moduleActions extends sfActions
     $request->checkCSRFProtection();
 
     $job = $this->getRoute()->getObject();
-    $job->publish();
+    $this->publish($job);    
 
     $this->getUser()->setFlash('notice', sprintf('Tu trabajo esta ahora en linea por %s dias.', sfConfig::get('app_dias_activo')));
 
-    $this->redirect($this->generateUrl('@mostrar_trabajo', $job));
+    $this->redirect($this->generateUrl('mostrar_trabajo', $job));
   }
   
-  public function publish()
+  public function publish(Trabajo $trabajo)
   {
-    $this->setEstaActivado(true);
-    $this->save();  
+    $trabajo->setEstaActivado(true);
+    $trabajo->save();  
   }
 }
 
