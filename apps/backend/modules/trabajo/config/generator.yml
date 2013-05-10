@@ -33,7 +33,10 @@ generator:
           _delete:    ~
       filter:  
         display: [compania, posicion, esta_activado, correo]
-      form: ~
+      form: 
+        display:
+          Content: [categoria_id, tipo, compania, logo, url, posicion, localizacion, descripcion, como_aplicar, esta_publicado, correo]
+          Admin:   [_generarToken, esta_activado]
       edit:    
         title: Editando el Trabajo de la compañia "%%compania%%"
       new:     

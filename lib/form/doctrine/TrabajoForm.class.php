@@ -47,6 +47,16 @@ class TrabajoForm extends BaseTrabajoForm
     $this->widgetSchema['logo'] = new sfWidgetFormInputFile(
             array('label' => 'Logo compañia',));
     
+    $this->widgetSchema['logo'] = new sfWidgetFormInputFileEditable(array(
+      'label'     => 'Company logo',
+      'file_src'  => '/uploads/logos_compania/'.$this->getObject()->getLogo(),
+      'is_image'  => true,
+      'edit_mode' => !$this->isNew(),
+      'template'  => '<div>%file%<br />%input%<br />%delete% %delete_label%</div>',
+    ));
+ 
+    $this->validatorSchema['logo_delete'] = new sfValidatorPass();
+    
     /*
      * Creandole un validador al widget anterior. sfValidatorFile es muy 
      * interesante ya que hace una serie de cosas: 
