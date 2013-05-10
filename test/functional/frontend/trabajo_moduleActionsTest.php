@@ -181,8 +181,9 @@ $browser->info('3 - Pagina de postear un trabajo')->
             'posicion'     => 'FOO1',
             'esta_activado' => true,
           ))->
-        end()->
+        end()
         
+        /*
         click('Borrar', array(), array('method' => 'delete', '_with_csrf' => true))->
  
         with('doctrine')->begin()->
@@ -190,4 +191,28 @@ $browser->info('3 - Pagina de postear un trabajo')->
             'position' => 'FOO2',
           ), false)->
         end()
-        ;        
+         * 
+         */
+        ;
+
+$browser->
+        info('4 - Historial de trabajos visto de un usuario')->
+
+        loadData()->
+        restart()->
+
+        info('  4.1 - Cuando el usuario accede a un trabajo este es guardardo en su historial')->
+        get('/')->
+        click('Desarrollo Web', array(), array('position' => 1))->
+        get('/')->
+        with('user')->begin()->
+          isAttribute('historial_trabajo', array($browser->getMostRecentProgrammingJob()->getId()))->
+        end()->
+
+        info('  4.2 - Un trabajo no es agregado dos veces')->
+        click('Desarrollo Web', array(), array('position' => 1))->
+        get('/')->
+        with('user')->begin()->
+          isAttribute('historial_trabajo', array($browser->getMostRecentProgrammingJob()->getId()))->
+        end()
+      ;

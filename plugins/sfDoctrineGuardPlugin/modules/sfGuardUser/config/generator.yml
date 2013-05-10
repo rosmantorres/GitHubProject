@@ -25,7 +25,7 @@ generator:
           "Permissions and groups": [is_active, is_super_admin, groups_list, permissions_list]
 
       edit:
-        title: Editing User "%%username%%"
+        title: Editando el usuario "%%username%%"
 
       new:
         title: New User
