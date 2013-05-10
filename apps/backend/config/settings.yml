@@ -33,3 +33,13 @@ all:
 
     # Enable the database manager
     use_database:           true
+    
+    # ::NUEVO:: Como los plugins son compartidos entre todas las aplicaciones 
+    # de un proyecto, tienes que permitir explícitamente los módulos que deseas
+    # utilizar agregando el item enabled_modules.
+    enabled_modules: [default, sfGuardAuth]
+    
+  # ::NUEVO:: Para cambiar la accion por defecto empleada por la pagina del login
+  .actions:
+    login_module:    sfGuardAuth
+    login_action:    signin
