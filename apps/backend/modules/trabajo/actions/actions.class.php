@@ -42,4 +42,25 @@ class trabajoActions extends autoTrabajoActions
  
     $this->redirect('trabajo');
   }
+  
+  public function executeListEnviarCorreo(sfWebRequest $request)
+  {/*
+    $trabajo = $this->getRoute()->getObject();
+ 
+    $remitente = 'rosman_torres@hotmail.com';
+    $para = array (
+        $trabajo->getCorreo() => 'Sr. Compañia',
+        'rosman_torres@gmail.com' => 'Rosman Torres',
+    );
+    $asunto = 'Mensaje enviado desde Symfony';
+    $cuerpo = 'Esta es una prueba enviada desde la lista de trabajos del backend';
+    
+    // Creando el mensaje
+    $mensaje = $this->getMailer()->compose($remitente,$para,$asunto,$cuerpo);
+    
+    // Enviando el mensaje
+    $this->getMailer()->send($mensaje);
+ */
+    $this->redirect('trabajo');
+  }
 }

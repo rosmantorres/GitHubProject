@@ -28,6 +28,7 @@ generator:
           _delete:    ~
           cambiarNombresCompania:     ~
         object_actions:
+          enviarCorreo: ~
           rosman:     { label: haha}
           _edit:      ~
           _delete:    ~
