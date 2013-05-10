@@ -10,7 +10,10 @@
  */
 class CategoriaForm extends BaseCategoriaForm
 {
+
   public function configure()
   {
+    
   }
+
 }

@@ -1,0 +1,40 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Trabajo
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          trabajo
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields: 
+        esta_activado: { label: Activacion, help: puede ser activado o no }
+      list: 
+        title: Gestion de Trabajo
+        layout:  stacked
+        display: [compania, posicion, localizacion, url, esta_activado, correo]
+        params:  |
+          %%esta_activado%% <small>%%=categoria%%</small> - %%compania%%
+          (<em>%%correo%%</em>) is looking for a %%=posicion%% (%%localizacion%%)
+        sort: [categoria, desc]
+        max_per_page: 5
+        batch_actions:
+          _delete:    ~
+          cambiarNombresCompania:     ~
+        object_actions:
+          rosman:     { label: haha}
+          _edit:      ~
+          _delete:    ~
+      filter:  
+        display: [compania, posicion, esta_activado, correo]
+      form: ~
+      edit:    
+        title: Editando el Trabajo de la compañia "%%compania%%"
+      new:     
+        title: Nuevo Trabajo

@@ -1,0 +1,26 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Categoria
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          categoria
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:    
+        title: Gestion de Categoría
+        display: [=nombre, slug]
+        batch_actions: {}
+      filter:  ~
+      form:    ~
+      edit:    
+        title: Editando la Categoría "%%nombre%%"
+      new:     
+        title: Nueva Categoría
