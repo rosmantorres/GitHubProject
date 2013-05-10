@@ -66,6 +66,9 @@ class trabajo_moduleActions extends sfActions
       $this->job = $this->trabajo;
      * 
      */
+    
+    $this->getUser()->addTrabajoAlHistorial($this->job);
+    
     $this->forward404Unless($this->job);
   }
 
