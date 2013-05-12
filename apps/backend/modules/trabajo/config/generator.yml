@@ -22,7 +22,6 @@ generator:
         params:  |
           %%esta_activado%% <small>%%=categoria%%</small> - %%compania%%
           (<em>%%correo%%</em>) is looking for a %%=posicion%% (%%localizacion%%)
-        sort: [categoria, desc]
         max_per_page: 5
         batch_actions:
           _delete:    ~

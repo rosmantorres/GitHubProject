@@ -1,0 +1,9 @@
+# You can find more information about this file on the symfony website:
+# http://www.symfony-project.org/reference/1_4/en/11-App
+
+# Dias activos de un puesto de trabajo para que sea general y no sea hardcodeado
+# dentro de las distinas clases. Ver lib/model/doctrine/Trabajo.class.php
+all:
+  dias_activo: 30
+  max_trabajo_en_homepage: 10
+  max_trabajo_en_categoria: 20

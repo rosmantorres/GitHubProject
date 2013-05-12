@@ -44,7 +44,7 @@ class trabajoActions extends autoTrabajoActions
   }
   
   public function executeListEnviarCorreo(sfWebRequest $request)
-  {/*
+  {
     $trabajo = $this->getRoute()->getObject();
  
     $remitente = 'rosman_torres@hotmail.com';
@@ -60,7 +60,7 @@ class trabajoActions extends autoTrabajoActions
     
     // Enviando el mensaje
     $this->getMailer()->send($mensaje);
- */
+ 
     $this->redirect('trabajo');
   }
 }
