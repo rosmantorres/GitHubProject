@@ -30,6 +30,9 @@
           <li>
             <?php echo link_to('Usuarios', 'sf_guard_user') ?>
           </li>
+          <li>
+            <?php echo link_to('Logout', 'sf_guard_signout') ?>
+          </li>
         </ul>
       </div>
       <?php endif; ?>

@@ -26,7 +26,9 @@ test:
 dev:
   mailer:
     param:
-      delivery_strategy: none
+      delivery_strategy: realtime
+      transport:
+        class:  Swift_MailTransport
 
 all:
   routing:
